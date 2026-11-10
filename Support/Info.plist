@@ -43,5 +43,7 @@
 	</array>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026 Tom Kornack. Licensed under Apache-2.0.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
