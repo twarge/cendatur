@@ -4,7 +4,7 @@
 // back, a sensor read — and prints the same report. `--setup` also sends
 // the setup sequence step by step.
 //
-// The scanner must be free — quit SnapScan first, since a claimed
+// The scanner must be free — quit Cendatur first, since a claimed
 // interface is exclusive.
 import CoreGraphics
 import Foundation

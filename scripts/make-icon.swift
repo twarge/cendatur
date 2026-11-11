@@ -1,4 +1,4 @@
-// Renders the SnapScan app icon into an .iconset directory.
+// Renders the Cendatur app icon into an .iconset directory.
 // Usage: swift scripts/make-icon.swift <output.iconset>
 import AppKit
 

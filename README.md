@@ -1,10 +1,10 @@
-# SnapScan
+# Cendatur
 
 A small macOS app that scans paper documents over USB and saves them as
 multi-page PDFs.
 
 The supported scanner (USB `0x04C5:0x132B`) doesn't speak TWAIN or Apple's
-Image Capture protocol, so SnapScan talks to it **directly over USB** with
+Image Capture protocol, so Cendatur talks to it **directly over USB** with
 its own driver: SCSI-2 scanner commands in the device's USB framing, spoken
 through IOUSBLib. There are **no third-party components** — no SANE, no
 libusb, no vendor software to install. The protocol was derived from USB
@@ -15,14 +15,17 @@ for how and why it was written.
 ## Using it
 
 1. Connect the scanner via USB and open the feeder flap (that powers it on).
-2. Launch SnapScan (copy it to /Applications if you like — the bundle is
+2. Launch Cendatur (copy it to /Applications if you like — the bundle is
    self-contained).
 3. Load paper, then press **Scan** in the app — or the **hardware Scan
-   button on the scanner itself** (SnapScan polls it about once a second
+   button on the scanner itself** (Cendatur polls it about once a second
    while idle).
 4. Pages are auto-rotated upright, assembled into a PDF at true physical
-   size, and saved directly into your scans folder (default
-   `~/Downloads`). No save dialog.
+   size, and saved directly into your scans folder. No save dialog. By default
+   that folder is **Cendatur in iCloud Drive**, so scans reach your other
+   devices; without iCloud it is `~/Downloads`. Installs that predate the
+   iCloud default keep saving where they did — Settings ▸ Saving has a
+   **Use iCloud Drive** button to switch.
 
 The sidebar lists the scans this app has made (tracked by file bookmarks,
 so a scan moved or renamed in Finder keeps its place; entries whose file is
@@ -119,7 +122,7 @@ the same single pass as duplex, with the fronts dropped.
 The settings that change from one stack of paper to the next are in the
 window's toolbar: paper size, sides, color, resolution, and toggles for
 cropping to the sheet, skipping blank pages and combining scans into one
-PDF. They're fixed while a scan runs. Everything lives in SnapScan ▸
+PDF. They're fixed while a scan runs. Everything lives in Cendatur ▸
 Settings (⌘,) as well: sides, color mode, 150–600 dpi, paper size, deskew,
 crop to sheet, blank-page skip, auto-rotate, the scans folder, compression,
 searchable text, suggested names, the hardware button toggle,
@@ -129,7 +132,7 @@ menu-bar-only mode, and start-at-login.
 Discard Scan ⌘⌫, Reveal in Finder ⇧⌘R, Share, and Open Scans Folder ⇧⌘O.
 Edit adds Delete Pages, Select All Pages ⇧⌘A and Rename. View resizes the
 page thumbnails with ⌘+ and ⌘−, which pinch-to-zoom previously did alone.
-Help opens the SnapScan page on twarge.com. The items route through the
+Help opens the Cendatur page on twarge.com. The items route through the
 focused window, so a menu command and the matching button do the same
 thing — Done commits whatever name is typed in the field, either way.
 
@@ -154,6 +157,15 @@ the scanner from inside this process, so there's no daemon to hand the work
 to. An intent waits for straightening, the text layer and the final save
 before returning, since the paper stops moving well before the PDF is done.
 
+**Widgets and Control Center**: the *Recent Scans* desktop widget lists
+the latest scans — click one to open it — with a Scan button in its medium
+and large sizes. On macOS 26 and later a *Scan* control can be added to
+Control Center or the menu bar. Neither is there until you add it. Both
+hand the work to the app, which is the only process that can reach the
+scanner: the widget by `cendatur://` links, the control by an intent that
+opens the app. The widget reads a short list of recent scans the app
+leaves in a container the two share.
+
 **Menu bar mode** hides the Dock icon and puts a scanner icon in the menu
 bar. Its panel is the whole app in that mode, so besides status and a Scan
 button it carries Recent Scans (the last five, each opening or revealing),
@@ -167,7 +179,7 @@ the system login items (the app should live in /Applications for that).
 ```bash
 make          # build the app (Release); prints the product path
 make test     # unit tests
-make probe    # headless driver check against the scanner (quit SnapScan first)
+make probe    # headless driver check against the scanner (quit Cendatur first)
 ```
 
 Xcode is the only build system, and there is nothing to build first:
@@ -178,23 +190,31 @@ Product ▸ Show Build Folder). Requires Xcode 16+ (macOS 15 target).
 
 The app is **sandboxed** (USB device entitlement for the scanner,
 user-selected file access for the scans folder — choosing a folder in
-Settings stores a security-scoped bookmark). It builds in the Swift 6
+Settings stores a security-scoped bookmark — an iCloud container for the
+default scans folder, and an app group shared with the widget extension).
+iCloud entitlements need a provisioning profile, so the first build with a
+development team has to be allowed to update provisioning (Xcode does this
+itself; from the command line, `xcodebuild -allowProvisioningUpdates`).
+Ad-hoc builds — CI, or a checkout without a team — use
+`Support/Cendatur-AdHoc.entitlements` instead (`APP_ENTITLEMENTS=…`),
+which leaves iCloud and the app group out; such a build saves to
+Downloads and its widget stays empty. It builds in the Swift 6
 language mode with main-actor default isolation, tests with Swift Testing,
 and uses the async Swift Vision API.
 
 ## How the pieces fit
 
-- `Sources/SnapScan/USBTransport.swift` — the USB layer: finds the
+- `Sources/Cendatur/USBTransport.swift` — the USB layer: finds the
   scanner, claims its interface, and speaks the 31-byte command / data /
   13-byte status framing. Built on IOUSBLib because IOUSBHost's user
   client cannot be opened inside the App Sandbox.
-- `Sources/SnapScan/ScannerCommands.swift` — SCSI command builders and
+- `Sources/Cendatur/ScannerCommands.swift` — SCSI command builders and
   response parsers: window descriptors in 1/1200-inch units, mode pages,
   sense decoding, sensor bits.
-- `Sources/SnapScan/NativeScanner.swift` — the scan pipeline: device
+- `Sources/Cendatur/NativeScanner.swift` — the scan pipeline: device
   setup, feed, streaming reads with live partial pages, duplex window
   alternation, and end-of-page handling.
-- `Sources/SnapScan/ScannerDiagnostics.swift` and `DiagnosticsView.swift`
+- `Sources/Cendatur/ScannerDiagnostics.swift` and `DiagnosticsView.swift`
   — Help ▸ Scanner Diagnostics (also in Settings): a guided run that
   records every USB exchange with the attached scanner (identity, mode
   pages read back, the Scan button and paper sensors, each setup step on
@@ -202,7 +222,7 @@ and uses the async Swift Vision API.
   plain-text report into the scans folder. Image transfers are kept to
   their first 16 bytes; the test page is added only if the person running
   it asks. `make probe` prints the same report from the command line.
-- `Sources/SnapScan/ScannerEngine.swift` — app-facing state machine:
+- `Sources/Cendatur/ScannerEngine.swift` — app-facing state machine:
   document lifecycle, direct-save, post-processing, and the hardware-button
   watch (reading the Scan-button sensor over the open USB connection).
   Straightening runs
@@ -211,14 +231,14 @@ and uses the async Swift Vision API.
   next scan can start while the previous document is still processing —
   such documents appear as spinner rows in the sidebar until their final
   PDF is written.
-- `Sources/SnapScan/BlankPageDetector.swift` — blank-page detection at
+- `Sources/Cendatur/BlankPageDetector.swift` — blank-page detection at
   150 dpi: ink is what falls well below the brightest paper within half a
   millimetre, in each pixel's darkest channel (so colour ink counts and
   tinted paper doesn't); marks are grouped, and specks, long hairlines
   (folds, sensor streaks) and column-aligned dashes (a streak from dust
   that touches the sensor intermittently) are discounted. It runs first in
   each page's processing, so a blank page skips the Vision passes.
-- `Sources/SnapScan/OrientationDetector.swift` — auto-rotate and deskew.
+- `Sources/Cendatur/OrientationDetector.swift` — auto-rotate and deskew.
   Accurate OCR reads text at any rotation but keeps its observation quads
   in the *given* coordinate space, so the circular mean of the text lines'
   topLeft→topRight vectors encodes the page's rotation directly — rounding
@@ -231,21 +251,30 @@ and uses the async Swift Vision API.
   0.25–6°) — sparse pages are deliberately left alone. (A backend-side
   deskew was tried and abandoned: its estimator tilts straight-but-sparse
   pages.)
-- `Sources/SnapScan/Intents.swift` — the Shortcuts/Spotlight/Siri surface:
+- `Sources/Cendatur/ContentView.swift` and its `ContentView+Sidebar`,
+  `+Detail` and `+Toolbar` extensions — the main window, one file per
+  region; `CompressionRow.swift`, `PageReordering.swift` and
+  `PageGridKeys.swift` hold the page grid's helpers.
+- `Sources/CendaturWidgets/` — the widget extension (Recent Scans widget,
+  Scan control); `Sources/Shared/WidgetShared.swift` is compiled into both
+  it and the app.
+- `Support/Localizable.xcstrings` — the String Catalog. English only so
+  far; Xcode keeps it in step with the source on each build.
+- `Sources/Cendatur/Intents.swift` — the Shortcuts/Spotlight/Siri surface:
   a scan action returning the PDF, a latest-scan action, and an entity
   query over the library. The parameter enums' `AppEnum` conformances live
   in `Models.swift`, since `AppEnum` implies `Sendable` and that has to be
   declared alongside the type.
-- `Sources/SnapScan/TextLayer.swift` — recognizes a page's words and draws
+- `Sources/Cendatur/TextLayer.swift` — recognizes a page's words and draws
   them into the PDF in text rendering mode 3: searchable and selectable,
   never painted. Coordinates are normalized, so they follow the image
   rather than the sheet when a page is size-snapped.
-- `Sources/SnapScan/NameSuggester.swift` — reads the first pages with
+- `Sources/Cendatur/NameSuggester.swift` — reads the first pages with
   Vision and asks the on-device model for a filename; falls back to the
   page's heading where there's no model.
-- `Sources/SnapScan/FrameImage.swift` — builds CGImages from raw scanner
+- `Sources/Cendatur/FrameImage.swift` — builds CGImages from raw scanner
   frames (including partial pages mid-scan).
-- `Sources/SnapScan/PDFBuilder.swift` — assembles pages into a PDF at true
+- `Sources/Cendatur/PDFBuilder.swift` — assembles pages into a PDF at true
   size, optionally re-encoding each page as JPEG so the PDF carries the
   compressed stream directly (`/DCTDecode`) instead of raw pixels.
   physical size (pixels ÷ dpi × 72 points), centering size-snapped pages.
@@ -271,7 +300,7 @@ Copyright © 2026 Tom Kornack.
 
 Licensed under the Apache License, Version 2.0 — see [LICENSE](LICENSE).
 Distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND. SnapScan bundles no third-party code.
+KIND. Cendatur bundles no third-party code.
 
 ## Limitations
 

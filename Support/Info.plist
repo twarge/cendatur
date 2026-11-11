@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>SnapScan</string>
+	<string>Cendatur</string>
 	<key>CFBundleDisplayName</key>
-	<string>SnapScan</string>
+	<string>Cendatur</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.twarge.snapscan</string>
 	<key>CFBundleExecutable</key>
-	<string>SnapScan</string>
+	<string>Cendatur</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<!-- Taken from the build settings so CI can stamp each upload: the
@@ -34,13 +34,41 @@
 			<key>UTTypeIdentifier</key>
 			<string>com.twarge.snapscan.pages</string>
 			<key>UTTypeDescription</key>
-			<string>SnapScan pages</string>
+			<string>Cendatur pages</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
 			</array>
 		</dict>
 	</array>
+	<!-- The widget's Scan button and its rows come back to the app as URLs. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.twarge.cendatur</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>cendatur</string>
+			</array>
+		</dict>
+	</array>
+	<!-- The container shared with the widget extension; see WidgetShared. -->
+	<key>CendaturAppGroup</key>
+	<string>$(DEVELOPMENT_TEAM).com.twarge.cendatur</string>
+	<!-- Shows the app's iCloud container as a "Cendatur" folder in iCloud Drive. -->
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.com.twarge.cendatur</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>Cendatur</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026 Tom Kornack. Licensed under Apache-2.0.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

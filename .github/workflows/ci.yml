@@ -31,23 +31,27 @@ jobs:
 
       # Ad-hoc signing (not CODE_SIGNING_ALLOWED=NO): the test host must
       # carry its sandbox entitlements, and the artifact stays launchable.
+      # The ad-hoc entitlements leave out iCloud, which needs a provisioning
+      # profile; without it the app saves to Downloads, as it does signed out.
       - name: Build (Release)
         run: |
           set -o pipefail
           xcodebuild build \
-            -project SnapScan.xcodeproj \
-            -scheme SnapScan \
+            -project Cendatur.xcodeproj \
+            -scheme Cendatur \
             -configuration Release \
             CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=- DEVELOPMENT_TEAM= \
+            APP_ENTITLEMENTS=Support/Cendatur-AdHoc.entitlements \
             | tail -40
 
       - name: Test
         run: |
           set -o pipefail
           xcodebuild test \
-            -project SnapScan.xcodeproj \
-            -scheme SnapScan \
+            -project Cendatur.xcodeproj \
+            -scheme Cendatur \
             CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=- DEVELOPMENT_TEAM= \
+            APP_ENTITLEMENTS=Support/Cendatur-AdHoc.entitlements \
             | tee "$RUNNER_TEMP/test.log" | tail -60
 
       # The tail above keeps the summary but cuts the per-test issue lines;
@@ -58,12 +62,12 @@ jobs:
 
       - name: Package build artifact
         run: |
-          PRODUCTS="$(xcodebuild -project SnapScan.xcodeproj -scheme SnapScan \
+          PRODUCTS="$(xcodebuild -project Cendatur.xcodeproj -scheme Cendatur \
             -configuration Release -showBuildSettings 2>/dev/null \
             | awk '/ BUILT_PRODUCTS_DIR =/{print $3}')"
-          ditto -c -k --keepParent "$PRODUCTS/SnapScan.app" SnapScan-ci.zip
+          ditto -c -k --keepParent "$PRODUCTS/Cendatur.app" Cendatur-ci.zip
 
       - uses: actions/upload-artifact@v7
         with:
-          name: SnapScan-ci
-          path: SnapScan-ci.zip
+          name: Cendatur-ci
+          path: Cendatur-ci.zip

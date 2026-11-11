@@ -1,0 +1,493 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "%@" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lld dpi" : {
+
+    },
+    "%lld dpi isn't supported. Choose 150, 200, 300, 400 or 600." : {
+
+    },
+    "%lld page%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld page%2$@"
+          }
+        }
+      }
+    },
+    ".pdf" : {
+
+    },
+    "About %@" : {
+
+    },
+    "About Cendatur" : {
+
+    },
+    "Add the test scan pictures" : {
+
+    },
+    "App" : {
+
+    },
+    "Asking the scanner what it is…" : {
+
+    },
+    "Auto-rotate pages upright" : {
+
+    },
+    "Back side" : {
+
+    },
+    "Black & white" : {
+
+    },
+    "Blank" : {
+
+    },
+    "Both sides" : {
+
+    },
+    "Cendatur" : {
+
+    },
+    "Cendatur Help" : {
+
+    },
+    "Cendatur checks the button about once a second while idle." : {
+
+    },
+    "Cendatur is already scanning." : {
+
+    },
+    "Cendatur won't start any other scan while this window is in use." : {
+
+    },
+    "Checking the setup sequence" : {
+
+    },
+    "Choose Folder…" : {
+
+    },
+    "Choose the folder scans are saved into" : {
+
+    },
+    "Cleanup" : {
+
+    },
+    "Close" : {
+
+    },
+    "Color" : {
+
+    },
+    "Color, grayscale, or black & white" : {
+
+    },
+    "Colour" : {
+
+    },
+    "Colour mode" : {
+
+    },
+    "Combine Scans" : {
+
+    },
+    "Combine scans into one document" : {
+
+    },
+    "Commit the name and finish — shows the saved PDF" : {
+
+    },
+    "Compression" : {
+
+    },
+    "Copy PDF" : {
+
+    },
+    "Copy Report" : {
+
+    },
+    "Crop each page to the sheet, for paper smaller than %@" : {
+
+    },
+    "Crop to Sheet" : {
+
+    },
+    "Crop to sheet" : {
+
+    },
+    "Crop to the sheet — Auto paper size always does" : {
+
+    },
+    "Crops each page to the sheet, for paper smaller than the size chosen. Paper ▸ Auto always does." : {
+
+    },
+    "Delete %lld Pages" : {
+
+    },
+    "Delete Page" : {
+
+    },
+    "Delete Pages" : {
+
+    },
+    "Diagnostics" : {
+
+    },
+    "Discard" : {
+
+    },
+    "Discard Scan" : {
+
+    },
+    "Document name" : {
+
+    },
+    "Does this look like the sheet?" : {
+
+    },
+    "Done" : {
+
+    },
+    "Each scan adds pages to the current PDF until you press Done." : {
+
+    },
+    "Each scan is saved as its own PDF." : {
+
+    },
+    "Estimating size…" : {
+
+    },
+    "Folder" : {
+
+    },
+    "Front side" : {
+
+    },
+    "Full report" : {
+
+    },
+    "Get Latest Scan" : {
+
+    },
+    "Grayscale" : {
+
+    },
+    "Identifying the scanner" : {
+
+    },
+    "Keep Cendatur only in the menu bar" : {
+
+    },
+    "Larger Thumbnails" : {
+
+    },
+    "Latest Scan" : {
+
+    },
+    "Leave blank pages out of the PDF" : {
+
+    },
+    "Looks right" : {
+
+    },
+    "Looks wrong" : {
+
+    },
+    "Make a scanner report" : {
+
+    },
+    "Make scans searchable" : {
+
+    },
+    "Move Pages Earlier" : {
+
+    },
+    "Move Pages Later" : {
+
+    },
+    "Move to End" : {
+
+    },
+    "Move to Start" : {
+
+    },
+    "Name" : {
+
+    },
+    "Names the PDF. Left empty, Cendatur names it after the document." : {
+
+    },
+    "No scanner found. Connect it by USB and open its feeder to switch it on." : {
+
+    },
+    "No scanner is connected." : {
+
+    },
+    "No scans yet" : {
+
+    },
+    "Notes (optional)" : {
+
+    },
+    "Open" : {
+
+    },
+    "Open Cendatur" : {
+
+    },
+    "Open Scans Folder" : {
+
+    },
+    "Open…" : {
+
+    },
+    "Paper" : {
+
+    },
+    "Paper size" : {
+
+    },
+    "Put Back" : {
+
+    },
+    "Quit Cendatur" : {
+
+    },
+    "Ready to Scan" : {
+
+    },
+    "Recent Scans" : {
+
+    },
+    "Rename…" : {
+
+    },
+    "Resolution" : {
+
+    },
+    "Resolution (dpi)" : {
+
+    },
+    "Return the skipped pages to where they were scanned" : {
+
+    },
+    "Returns the most recently saved PDF without scanning anything new." : {
+
+    },
+    "Reveal in Finder" : {
+
+    },
+    "Rotate Left" : {
+
+    },
+    "Rotate Right" : {
+
+    },
+    "Save Report" : {
+
+    },
+    "Save scans into the Cendatur folder in iCloud Drive" : {
+
+    },
+    "Saved as PNG files next to the report. Leave this off if the sheet had anything private on it." : {
+
+    },
+    "Saved to %@" : {
+
+    },
+    "Saving" : {
+
+    },
+    "Scan" : {
+
+    },
+    "Scan %lld: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Scan %1$lld: %2$@"
+          }
+        }
+      }
+    },
+    "Scan Both Sides" : {
+
+    },
+    "Scan Front Side" : {
+
+    },
+    "Scan To" : {
+
+    },
+    "Scan a Document" : {
+
+    },
+    "Scan a document" : {
+
+    },
+    "Scanned" : {
+
+    },
+    "Scanner" : {
+
+    },
+    "Scanner Diagnostics" : {
+
+    },
+    "Scanner Diagnostics…" : {
+
+    },
+    "Scanner diagnostics" : {
+
+    },
+    "Scanning" : {
+
+    },
+    "Scanning…" : {
+
+    },
+    "Scans folder" : {
+
+    },
+    "Scans whatever is in the feeder and returns the finished PDF." : {
+
+    },
+    "Select All Pages" : {
+
+    },
+    "Send the report%@ to Cendatur's developer." : {
+
+    },
+    "Sending the setup commands…" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Share…" : {
+
+    },
+    "Show in Finder" : {
+
+    },
+    "Sides" : {
+
+    },
+    "Skip Blank Pages" : {
+
+    },
+    "Skip blank pages" : {
+
+    },
+    "Smaller Thumbnails" : {
+
+    },
+    "Start" : {
+
+    },
+    "Start Cendatur at login" : {
+
+    },
+    "Start Over" : {
+
+    },
+    "Start a Scan" : {
+
+    },
+    "Start scanning with the scanner's Scan button" : {
+
+    },
+    "Stop" : {
+
+    },
+    "Straighten pages" : {
+
+    },
+    "Straightening %lld page%@…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Straightening %1$lld page%2$@…"
+          }
+        }
+      }
+    },
+    "Suggest a name from the document" : {
+
+    },
+    "Test scan" : {
+
+    },
+    "The feeder is empty — load paper and try again." : {
+
+    },
+    "The feeder was empty — load paper and try again." : {
+
+    },
+    "The model printed on the scanner, what goes wrong, anything else…" : {
+
+    },
+    "The report contains" : {
+
+    },
+    "The scan failed: %@" : {
+
+    },
+    "Throw this scan away — the PDF moves to the Trash" : {
+
+    },
+    "Use iCloud Drive" : {
+
+    },
+    "View Larger" : {
+
+    },
+    "Which sides of each sheet to keep" : {
+
+    },
+    "Your report is ready" : {
+
+    },
+    "document" : {
+
+    },
+    "paper" : {
+
+    },
+    "pdf" : {
+
+    },
+    "scan" : {
+
+    },
+    "· %lld blank page%@ skipped" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "· %1$lld blank page%2$@ skipped"
+          }
+        }
+      }
+    },
+    "•" : {
+
+    }
+  },
+  "version" : "1.0"
+}

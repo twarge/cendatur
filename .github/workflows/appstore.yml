@@ -4,7 +4,7 @@ name: App Store
 # review). Run it manually from the Actions tab, or push a version tag
 # like v1.2.
 #
-# macOS only: SnapScan drives a USB scanner, so there is no iOS build.
+# macOS only: Cendatur drives a USB scanner, so there is no iOS build.
 #
 # Required repository secrets (Settings → Secrets and variables → Actions):
 #   ASC_KEY_ID     App Store Connect API key ID
@@ -111,7 +111,7 @@ jobs:
           elif [[ -n "$INPUT_VERSION" ]]; then
             VERSION="$INPUT_VERSION"
           else
-            VERSION=$(sed -n 's/.*MARKETING_VERSION = \([0-9.][0-9.]*\);.*/\1/p' SnapScan.xcodeproj/project.pbxproj | head -1)
+            VERSION=$(sed -n 's/.*MARKETING_VERSION = \([0-9.][0-9.]*\);.*/\1/p' Cendatur.xcodeproj/project.pbxproj | head -1)
           fi
           [[ "$VERSION" =~ ^[0-9]+(\.[0-9]+)*$ ]] || { echo "::error::Resolved version '$VERSION' is not a plain version number (tag like v1.2)"; exit 1; }
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
@@ -157,11 +157,11 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
         run: |
           xcodebuild archive \
-            -project SnapScan.xcodeproj \
-            -scheme SnapScan \
+            -project Cendatur.xcodeproj \
+            -scheme Cendatur \
             -configuration Release \
             -destination 'generic/platform=macOS' \
-            -archivePath build/SnapScan-macOS.xcarchive \
+            -archivePath build/Cendatur-macOS.xcarchive \
             MARKETING_VERSION='${{ steps.version.outputs.version }}' \
             CURRENT_PROJECT_VERSION='${{ github.run_number }}.${{ github.run_attempt }}' \
             -allowProvisioningUpdates \
@@ -175,7 +175,7 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
         run: |
           xcodebuild -exportArchive \
-            -archivePath build/SnapScan-macOS.xcarchive \
+            -archivePath build/Cendatur-macOS.xcarchive \
             -exportOptionsPlist build-exportOptions.plist \
             -allowProvisioningUpdates \
             -authenticationKeyPath ~/private_keys/AuthKey_"$ASC_KEY_ID".p8 \

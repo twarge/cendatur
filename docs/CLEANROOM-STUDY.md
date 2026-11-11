@@ -93,14 +93,14 @@ and can be licensed Apache-2.0.
 
 `scripts/add-usb-trace.py` injects a bulk-transfer logging hook into the
 vendored libusb during `scripts/build-sane.sh` (idempotent; dormant
-unless `SNAPSCAN_USB_TRACE` names an output file, so normal builds are
+unless `CENDATUR_USB_TRACE` names an output file, so normal builds are
 unaffected). `scripts/capture-session.sh <name> [--scan]` records a
 session into `docs/captures/`, and `scripts/decode-capture.py` renders a
 raw log as an annotated transcript — Fujitsu USB framing, the SCSI
 command inside it, and status packets.
 
 **To record the first sessions** (the scanner must be awake — flap open —
-and SnapScan must be quit, since one process at a time can hold it):
+and Cendatur must be quit, since one process at a time can hold it):
 
 ```
 make smoke                                   # build the capture tool
