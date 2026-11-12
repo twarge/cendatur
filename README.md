@@ -278,8 +278,9 @@ and uses the async Swift Vision API.
   size, optionally re-encoding each page as JPEG so the PDF carries the
   compressed stream directly (`/DCTDecode`) instead of raw pixels.
   physical size (pixels ÷ dpi × 72 points), centering size-snapped pages.
-- `scripts/make-icon.swift` — the app icon's source; only run if
-  `Support/AppIcon.icns` is ever deleted.
+- `scripts/make-icon.swift` — the app icon's source: writes
+  `Support/AppIcon.icon`, the layered Icon Composer bundle Xcode compiles
+  into the app. Only run when the design changes.
 
 ## CI and releases
 

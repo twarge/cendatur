@@ -41,7 +41,7 @@
 		AB0100000000000000000010 /* USBWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0100000000000000000010 /* USBWatcher.swift */; };
 		AB0100000000000000000012 /* FrameImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0100000000000000000012 /* FrameImage.swift */; };
 		AB0100000000000000000013 /* PageGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0100000000000000000013 /* PageGeometry.swift */; };
-		AB0900000000000000000001 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = AF0400000000000000000002 /* AppIcon.icns */; };
+		AB0900000000000000000001 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = AF0400000000000000000002 /* AppIcon.icon */; };
 		AB0900000000000000000002 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AF0900000000000000000001 /* LICENSE */; };
 		AB0200000000000000000007 /* PageGeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0200000000000000000007 /* PageGeometryTests.swift */; };
 		AB0200000000000000000009 /* BlankPageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0200000000000000000009 /* BlankPageTests.swift */; };
@@ -156,7 +156,7 @@
 		AF0200000000000000000003 /* PDFBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFBuilderTests.swift; sourceTree = "<group>"; };
 		AF0300000000000000000001 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		AF0400000000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF0400000000000000000002 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		AF0400000000000000000002 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		AF0900000000000000000001 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		AF0500000000000000000001 /* Cendatur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cendatur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF0500000000000000000002 /* CendaturTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CendaturTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -318,7 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				AF0400000000000000000001 /* Info.plist */,
-				AF0400000000000000000002 /* AppIcon.icns */,
+				AF0400000000000000000002 /* AppIcon.icon */,
 				AF0900000000000000000001 /* LICENSE */,
 				AF0900000000000000000002 /* Localizable.xcstrings */,
 				AF0400000000000000000003 /* Cendatur.entitlements */,
@@ -464,7 +464,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB0900000000000000000001 /* AppIcon.icns in Resources */,
+				AB0900000000000000000001 /* AppIcon.icon in Resources */,
 				AB0900000000000000000002 /* LICENSE in Resources */,
 				AB0900000000000000000003 /* Localizable.xcstrings in Resources */,
 			);
@@ -703,6 +703,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APP_ENTITLEMENTS = Support/Cendatur.entitlements;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "$(APP_ENTITLEMENTS)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -728,6 +729,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APP_ENTITLEMENTS = Support/Cendatur.entitlements;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "$(APP_ENTITLEMENTS)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
